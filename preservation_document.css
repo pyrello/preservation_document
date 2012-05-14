@@ -1,0 +1,2 @@
+#page-wrapper { overflow: hidden; height: 100%; min-height: 100%; }
+#pdfviewer { height: 100%; width: 100%; border: none; overflow: auto; }

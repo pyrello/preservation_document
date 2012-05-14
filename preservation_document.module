@@ -1,0 +1,27 @@
+<?php
+/**
+ * @file
+ * Code for the Preservation Document feature.
+ */
+
+include_once('preservation_document.features.inc');
+
+function preservation_document_theme_registry_alter(&$theme_registry) {
+	$theme_registry['node__document'] = array(
+		'template' => drupal_get_path('module', 'preservation_document') . '/templates/node--document',
+		'type' => 'module',
+	);
+	$theme_registry['page__document'] = array(
+		'template' => drupal_get_path('module', 'preservation_document') . '/templates/page--document',
+		'type' => 'module',
+	);
+}
+
+function preservation_document_preprocess_page(&$vars) {
+	if (isset($vars['node']->type) && $vars['node']->type == 'document') {
+		$vars['theme_hook_suggestions'][] =  'page__document';
+		drupal_add_css(drupal_get_path('module', 'preservation_document') . '/css/preservation-document.css');
+		drupal_add_js(drupal_get_path('module', 'preservation_document') . '/js/pdfobject.js');
+		drupal_add_js(drupal_get_path('module', 'preservation_document') . '/js/preservation-document.js');
+	}
+}
